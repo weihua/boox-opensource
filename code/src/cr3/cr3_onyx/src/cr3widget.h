@@ -108,15 +108,16 @@ class CR3View : public QWidget, public LVDocViewCallback
         QString getSelectionText() { return _selText; }
         /// create bookmark
         CRBookmark * createBookmark();
-        CRBookmark * createCite();
-        void paintCite();
+        CRBookmark * createCitation();
+        void deleteCitation(QMouseEvent * evnet);
+        void paintCitation();
         /// go to bookmark and highlight it
         void goToBookmark( CRBookmark * bm );
         bool hasBookmark();
         void deleteBookmark();
 
-        bool citationMode() { return _citation_mode_; }
-        bool setCitationMode(bool enable) { _citation_mode_ = enable; }
+        void enableAddCitation(bool enable) { enable_add_citation_ = enable; }
+        void enableDeleteCitation(bool enable) { enable_delete_citation_ = enable; }
 
         /// rotate view, +1 = 90` clockwise, -1 = 90` counterclockwise
         void rotate( int angle );
@@ -282,8 +283,8 @@ class CR3View : public QWidget, public LVDocViewCallback
         QImage img_;
         bool able_turn_page_;
 
-        bool _citation_mode_;
-
+        bool enable_add_citation_;
+        bool enable_delete_citation_;
 };
 
 #endif // CR3WIDGET_H
